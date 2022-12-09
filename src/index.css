@@ -1,13 +1,130 @@
-body {
+
+
+* {
+  padding: 0;
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+  box-sizing: border-box;
+}
+
+html {
+  background: #171719;
+}
+
+/* 
+@font-face {
+  font-family: 'Bebas Neue';
+  src: url('./bebasneue/bebasneuebold.ttf')  format('truetype'), url('./bebasneue/bebasneuebold.woff'), url('./bebasneue/bebasneuebold.woff2'), 
+  url('./bebasneue/bebasneuebook.ttf'), url('./bebasneue/bebasneuebook.woff'),url('./bebasneue/bebasneuebook.woff2'), 
+  url('./bebasneue/bebasneuelight.ttf'), url('./bebasneue/bebasneuelight.woff'),url('./bebasneue/bebasneuelight.woff2'), 
+  url('./bebasneue/bebasneueregular.ttf'), url('./bebasneue/bebasneueregular.woff'),url('./bebasneue/bebasneueregular.woff2'), 
+  url('./bebasneue/bebasneuethin.ttf'), url('./bebasneue/bebasneuethin.woff'),url('./bebasneue/bebasneuethin.woff2');
+  font-weight: normal;
+  font-style: normal;
+} */
+
+
+body {
+  background: transparent;
+  font-family: 'Bebas Neue';
+  font-style: normal;
+  line-height: 120%;
+  margin: 0;
+}
+
+
+
+.primary-color {
+  color: rgba(231, 86, 38, 1);
+}
+
+.primary-bg {
+  background: rgba(231, 86, 38, 1);
+}
+
+.secondary-color {
+  color: rgba(255, 255, 255, 1);
+}
+
+.half-width {
+  width: 50%;
+}
+
+.slim-width {
+  width: fit-content;
+}
+
+.in-row {
+  display: flex;
+  flex-direction: row;
+}
+
+.content-right {
+  justify-content: flex-end;
+}
+
+.content-center {
+  justify-content: center;
+}
+
+.content-left {
+  justify-content: flex-start;
+}
+
+p {
+  margin: 0;
+  padding: 0;
+}
+
+.alignment-center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.circle {
+  border-radius: 50%;
 }
 
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
+}
+
+.flow {
+  position: absolute;
+}
+.parent {
+  position: relative;
+}
+
+.slim {
+  width: fit-content;
+  height: fit-content;
+}
+
+
+span.slice{
+  width: 200px !important;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  /* white-space: nowrap; */
+}
+
+.press {
+  flex-grow: 1;
+}
+
+.info {
+  text-align: left;
+}
+
+
+.from-bottom {
+  display: flex;
+  flex-direction: column-reverse;
+  
+}
+
+.observer {
+  transition: all 0.45s ease-out;
 }
