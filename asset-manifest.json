@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "/metamask-tt/static/css/main.6784fc86.css",
-    "main.js": "/metamask-tt/static/js/main.151af759.js",
+    "main.js": "/metamask-tt/static/js/main.c0886509.js",
     "static/js/787.28cb0dcd.chunk.js": "/metamask-tt/static/js/787.28cb0dcd.chunk.js",
     "static/media/planet.png": "/metamask-tt/static/media/planet.0c6035829e6d304635ef.png",
     "static/media/AvenirNextCyr-ThinItalic.eot": "/metamask-tt/static/media/AvenirNextCyr-ThinItalic.abcd9d8551aca503cabd.eot",
@@ -69,11 +69,11 @@
     "static/media/bebasneuebold.woff2": "/metamask-tt/static/media/bebasneuebold.beb6b9047e5df8aa73cc.woff2",
     "index.html": "/metamask-tt/index.html",
     "main.6784fc86.css.map": "/metamask-tt/static/css/main.6784fc86.css.map",
-    "main.151af759.js.map": "/metamask-tt/static/js/main.151af759.js.map",
+    "main.c0886509.js.map": "/metamask-tt/static/js/main.c0886509.js.map",
     "787.28cb0dcd.chunk.js.map": "/metamask-tt/static/js/787.28cb0dcd.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.6784fc86.css",
-    "static/js/main.151af759.js"
+    "static/js/main.c0886509.js"
   ]
 }
