@@ -24,14 +24,7 @@ function App() {
       </svg>
 
 
-  {/* <div className="parent" style={{top: 0, width: '100%'}}> */}
-  {/* <div className="parent in-row main-block" style={{flexDirection: 'row-reverse'}}> */}
-  {/* <div className="parent in-row main-block" style={{}}> */}
-  <div className=" main-block" style={{
-        width: '100vw',
-        height: '100vh',
-        padding: '14px 5% 60px 5%'
-  }}>
+  <div className="full-screen">
 
 
 <header className='in-row'>
@@ -249,68 +242,67 @@ function App() {
 </div>
 
 
+<div className="full-screen">
+  <div className="in-row info">
 
+      <div className='press user'>
+      <p className='user__title primary-color'>Beta test registration</p>
 
-<div className="in-row info">
+            
+        <p className='user__subtitle subtitle'>
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. 
+        </p>
 
-    <div className='press user'>
-    <p className='user__title primary-color'>Beta test registration</p>
-
-          
-      <p className='user__subtitle subtitle'>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. 
-      </p>
-
-      <div className="user__form">
-        <div className="user__field">
-          <p className='secondary-color user__label'>Name</p>
-          {
-            loggedIn ?  <p className='primary-color user__form-value'>Rojer waters</p> : <input className='user__form-input primary-color' type="text" placeholder='We will display your name in participation list' />
-          }
-          
+        <div className="user__form">
+          <div className="user__field">
+            <p className='secondary-color user__label'>Name</p>
+            {
+              loggedIn ?  <p className='primary-color user__form-value'>Rojer waters</p> : <input className='user__form-input primary-color' type="text" placeholder='We will display your name in participation list' />
+            }
+            
+          </div>
+          <div className="user__field">
+            <p className='secondary-color user__label'>Email</p>
+            {
+              loggedIn ?  <p className='primary-color user__form-value'>Charadeyouare@gmail.com</p> : <input className='user__form-input primary-color' type="text" placeholder='We will display your email in participation list' />
+            }
+          </div>
+          <button className="user__form-button primary-bg secondary-color">
+            { loggedIn ? 'List me to the table' : 'Connect metamask'}
+          </button>
         </div>
-        <div className="user__field">
-          <p className='secondary-color user__label'>Email</p>
-          {
-            loggedIn ?  <p className='primary-color user__form-value'>Charadeyouare@gmail.com</p> : <input className='user__form-input primary-color' type="text" placeholder='We will display your email in participation list' />
-          }
-        </div>
-        <button className="user__form-button primary-bg secondary-color">
-          { loggedIn ? 'List me to the table' : 'Connect metamask'}
-        </button>
+
+
       </div>
-
-
-    </div>
-{
-  loggedIn ? 
-  <div className="slim">
-    <p className="caption">
-      Participation listing (enable only for participants)
-    </p>
-    <table>
-      <thead>
-        <tr>
-          <th>Name</th>
-          <th>Email</th>
-          <th className='slice' style={{width: '200px'}}>Wallet</th>
-        </tr>
-      </thead>
-      <tbody>
-        {data?.items.map((item: any, index: any) => (
-          <tr key={index}>
-            <td>{item.username}</td>
-            <td>{item.email}</td>
-            {/* <td><span className="slice">{item.address}</span></td> */}
-            <td>{item.address.slice(0, 20)}...</td>
+  {
+    loggedIn ? 
+    <div className="slim">
+      <p className="caption">
+        Participation listing (enable only for participants)
+      </p>
+      <table>
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>Email</th>
+            <th className='slice' style={{width: '200px'}}>Wallet</th>
           </tr>
-        ))}
-      </tbody>
-    </table>
-  </div> : <></>
-}
+        </thead>
+        <tbody>
+          {data?.items.map((item: any, index: any) => (
+            <tr key={index}>
+              <td>{item.username}</td>
+              <td>{item.email}</td>
+              {/* <td><span className="slice">{item.address}</span></td> */}
+              <td>{item.address.slice(0, 20)}...</td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div> : <></>
+  }
+  </div>
 </div>
-
 
 
     </div>
