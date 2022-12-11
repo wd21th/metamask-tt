@@ -81,6 +81,11 @@ p {
   right: 0;
 }
 
+.left-corner {
+  top: 0;
+  left: 0;
+}
+
 .center {
   top: 50%;
   left: 50%;

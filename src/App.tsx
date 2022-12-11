@@ -1,8 +1,6 @@
 import React, { FormEvent } from 'react';
 import './App.css';
 import planet from './planet.png';
-
-import ReactDOM from 'react-dom'
 import { ethers } from 'ethers';
 import SimpleStorage_abi from './SimpleStorage_abi.json'
 
@@ -10,13 +8,9 @@ import SimpleStorage_abi from './SimpleStorage_abi.json'
 import {
   Routes,
   Route,
-  Outlet,
   useParams,
-  useOutletContext,
-  useLocation,
-  useNavigate,
 } from 'react-router-dom';
-import { Link, NavLink } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 var keys: any = {37: 1, 38: 1, 39: 1, 40: 1};
 
@@ -134,6 +128,36 @@ function MainPage() {
           alert(error.message);
         });
     }
+
+    const movePlanet = (e: any)=> {
+      const x = e.clientX;
+      const y = e.clientY;
+      const el = document.querySelector('.title.parent.dsnc') as HTMLElement;
+      const planetImage = document.querySelector('#planet') as HTMLElement;
+      var rect = (document.querySelector("#cmksalcnksd")as HTMLElement).getBoundingClientRect();
+      var x_r = e.clientX - rect.left;
+      var y_r = e.clientY - rect.top;
+      if(el){
+        el.style.clipPath = `circle(160px at ${x_r}px ${y_r}px)`
+        planetImage.style.top = `${y_r}px`
+        planetImage.style.left = `${x_r}px`
+      }
+    }
+
+    const returnToPlace = (e: any)=> {
+      const x = e.clientX;
+      const y = e.clientY;
+      const el = document.querySelector('.title.parent.dsnc') as HTMLElement;
+      const planetImage = document.querySelector('#planet') as HTMLElement;
+      
+      
+      if(el){
+        el.style.clipPath = `circle(160px at 63% 40%)`
+        planetImage.style.transform = `translateX(-50%) translateY(-50%)`
+        planetImage.style.top = `40%`
+        planetImage.style.left = `63%`
+      }
+    }
     
     
     
@@ -245,125 +269,73 @@ function MainPage() {
             </div>
           </div>
           
-          <div
-          style={{position: 'relative', top: 0, left: 0, }}>
+          <div className='parent left-corner'>
             
-            <div className="parent" id="cmksalcnksd" style={{
-              marginBottom: '45px',
-            }} >
-          <div className="title parent dsnc observer" style={{clipPath: 'circle(160px at 63% 40%)', zIndex: 110, pointerEvents: 'none'}}
-          >
-            <p>
-              Explore Your own planet
-            </p>
-            <p>
-              In <span className="ld">our New</span> metaverse
-            </p>
-          </div>
-          
-          
-            
-         
-          <div className="fifth-level circle flow"
-          onMouseMove={(e)=> {
-            const x = e.clientX;
-            const y = e.clientY;
-            const el = document.querySelector('.title.parent.dsnc') as HTMLElement;
-            const planetImage = document.querySelector('#kdjacn') as HTMLElement;
-          
-            var rect = (document.querySelector("#cmksalcnksd")as HTMLElement).getBoundingClientRect();
-            var x_r = e.clientX - rect.left;
-            var y_r = e.clientY - rect.top;
-          
-          
-            if(el){
-              el.style.clipPath = `circle(160px at ${x_r}px ${y_r}px)`
-              planetImage.style.top = `${y_r}px`
-              planetImage.style.left = `${x_r}px`
-            }
-          }}
-          
-          onMouseLeave={(e)=> {
-            const x = e.clientX;
-            const y = e.clientY;
-            const el = document.querySelector('.title.parent.dsnc') as HTMLElement;
-            const planetImage = document.querySelector('#kdjacn') as HTMLElement;
-            
-            
-            if(el){
-              el.style.clipPath = `circle(160px at 63% 40%)`
-              planetImage.style.transform = `translateX(-50%) translateY(-50%)`
-              planetImage.style.top = `40%`
-              planetImage.style.left = `63%`
-            }
-          }}>
-
-            <div className="circle__ pointless">
-              <div className="circle__item">
-                <div className="circle__half circle__half--clipped"></div>
-              </div>
-              <div className="circle__half circle__half--fix">
-              </div>
-          
-          
-            
-            <div className="fourth-level circle slim-width">
-              <div className="third-level circle slim-width">
-                <div className="second-level circle slim-width">
-                  <div className="first-level circle slim-width">
-                    <div className='parent' style={{opacity: 0}} >
-                      <img className='pointless' src={planet} alt=""/>
-                    </div>
-                    <div className="quarter">
-                      <p>Q1 2022</p>
-                    </div>
-                    <span className="sub-circle">
-                      <span className="point point-1"></span>
-                    </span>
-                    <span className="point point-2"></span>
-                    <span className="point point-3"></span>
-                    <span className="point point-4"></span>
-                  </div>
+                  <div className="parent" id="cmksalcnksd" style={{
+                    marginBottom: '45px',
+                  }} >
+                <div className="title parent dsnc observer pointless">
+                  <p>
+                    Explore Your own planet
+                  </p>
+                  <p>
+                    In <span className="ld">our New</span> metaverse
+                  </p>
                 </div>
+              
+                <div className="fifth-level circle flow"
+                    onMouseMove={movePlanet}
+                    onMouseLeave={returnToPlace}
+                >
+                  <div className="circle__ pointless">
+                    <div className="circle__item">
+                      <div className="circle__half circle__half--clipped"></div>
+                    </div>
+                    <div className="circle__half circle__half--fix"></div>
+                    <div className="fourth-level circle slim-width">
+                      <div className="third-level circle slim-width">
+                        <div className="second-level circle slim-width">
+                          <div className="first-level circle slim-width">
+                            <div className='parent' style={{opacity: 0}} >
+                              <img className='pointless' src={planet} alt=""/>
+                            </div>
+                            <div className="quarter">
+                              <p>Q1 2022</p>
+                            </div>
+                            <span className="sub-circle">
+                              <span className="point point-1"></span>
+                            </span>
+                            <span className="point point-2"></span>
+                            <span className="point point-3"></span>
+                            <span className="point point-4"></span>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>      
+                </div>
+                <div className="from-bottom flow right-corner">
+                  <ul className='roadmap'>
+                    <caption className='roadmap__caption secondary-color'>Roadmap stats</caption>
+                    <li className='roadmap__point'>
+                      <div className="roadmap__point-title primary-color">12, 345</div>
+                      <div className="roadmap__point-subtitle secondary-color">Lorem inpsum</div>
+                    </li>
+                    <li className='roadmap__point'>
+                      <div className="roadmap__point-title primary-color">12, 345</div>
+                      <div className="roadmap__point-subtitle secondary-color">Lorem inpsum</div>
+                    </li>
+                    <li className='roadmap__point'>
+                      <div className="roadmap__point-title primary-color">12, 345</div>
+                      <div className="roadmap__point-subtitle secondary-color">Lorem inpsum</div>
+                    </li>
+                  </ul>
+                </div>
+                <img id="planet" className='flow observer pointless' src={planet} alt=""/>
               </div>
-            </div>
-            
-            </div>
-          
-          
-                          
-                        
-              </div>
-          
-              <div className="from-bottom flow right-corner">
-                <ul className='roadmap'>
-                  <caption className='roadmap__caption secondary-color'>Roadmap stats</caption>
-                  <li className='roadmap__point'>
-                    <div className="roadmap__point-title primary-color">12, 345</div>
-                    <div className="roadmap__point-subtitle secondary-color">Lorem inpsum</div>
-                  </li>
-                  <li className='roadmap__point'>
-                    <div className="roadmap__point-title primary-color">12, 345</div>
-                    <div className="roadmap__point-subtitle secondary-color">Lorem inpsum</div>
-                  </li>
-                  <li className='roadmap__point'>
-                    <div className="roadmap__point-title primary-color">12, 345</div>
-                    <div className="roadmap__point-subtitle secondary-color">Lorem inpsum</div>
-                  </li>
-                </ul>
-              </div>
-            <img id="kdjacn" className='flow observer' src={planet} alt="" style={{top: '40%', left: '63%', transform: 'translateX(-50%) translateY(-50%)',
-            zIndex: 10,
-            pointerEvents:'none'
-            }}  />
-          
-            
-            </div>
-          
-
-            <p className='subtitle'>
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. 
-            </p>
+              <p className='subtitle'>
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. 
+              </p>
           </div>
           
             </div>
