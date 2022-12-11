@@ -40,6 +40,11 @@ body {
   width: fit-content;
 }
 
+.fill {
+  width: 100%;
+  height: 100%;
+}
+
 .in-row {
   display: flex;
   flex-direction: row;

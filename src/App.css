@@ -1,11 +1,5 @@
 .App {
   text-align: center;
-  /* padding left and right 5%, top 14px */
-  /* padding: 14px 5% 0 5%; */
-  /* filter: blur(5px); */
-
-  
-  
 }
 #planet {
   top: 40%;
@@ -72,7 +66,7 @@ header {
 }
 
 header {
-  padding: 14px 5% 0px 5%;
+  /* padding: 14px 5% 0px 5%; */
 }
 
 .title {
@@ -167,11 +161,9 @@ header {
   
   font-weight: 400;
   font-size: 18px;
-  line-height: 120%;
-  /* or 22px */
-
 
   color: #FFFFFF;
+  padding: 12px 0;
 }
 
 .wallet {
@@ -212,10 +204,7 @@ header {
 .fifth-level {
   box-shadow: inset 0px 0px 23px #212124;
   padding: 23px;
-  /* top: 50%; */
-  /* right: 0%; */
-  /* transform: translateX(40%) translateY(-50%); */
-
+  
   top: 40%;
   left: 63%;
   transform: translateX(-50%) translateY(-50%);
@@ -223,6 +212,15 @@ header {
   cursor: pointer;
   /* z-index: 1; */
 }
+
+
+.fifth-level.edge {
+  top: 50%; 
+  left: 60%;
+  /* right: 0%; */
+  transform: translateX(40%) translateY(-50%);
+}
+
 
 
 
@@ -326,6 +324,10 @@ header {
   box-shadow: -2px -2px 6px rgba(50, 50, 50, 0.25), 2px 2px 6px rgba(50, 50, 50, 0.25);
 }
 
+.point.point-1.hide {
+  background: transparent;
+}
+
 .sub-circle {
   top: 50%;
   left: 50%;
@@ -398,6 +400,15 @@ header {
   clip-path: circle(160px at 63% 40%);
   z-index: 110;
   
+}
+
+.td3 a {
+  pointer-events: none;
+}
+
+.remove-me {
+  right: 10px;
+  cursor: pointer;
 }
 
 
