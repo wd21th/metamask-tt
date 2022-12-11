@@ -132,9 +132,9 @@ function MainPage() {
     const movePlanet = (e: any)=> {
       const x = e.clientX;
       const y = e.clientY;
-      const el = document.querySelector('.title.parent.dsnc') as HTMLElement;
+      const el = document.querySelector('.cut-circle') as HTMLElement;
       const planetImage = document.querySelector('#planet') as HTMLElement;
-      var rect = (document.querySelector("#cmksalcnksd")as HTMLElement).getBoundingClientRect();
+      var rect = (document.querySelector("#text-overlay")as HTMLElement).getBoundingClientRect();
       var x_r = e.clientX - rect.left;
       var y_r = e.clientY - rect.top;
       if(el){
@@ -145,15 +145,10 @@ function MainPage() {
     }
 
     const returnToPlace = (e: any)=> {
-      const x = e.clientX;
-      const y = e.clientY;
-      const el = document.querySelector('.title.parent.dsnc') as HTMLElement;
+      const el = document.querySelector('.cut-circle') as HTMLElement;
       const planetImage = document.querySelector('#planet') as HTMLElement;
-      
-      
       if(el){
         el.style.clipPath = `circle(160px at 63% 40%)`
-        planetImage.style.transform = `translateX(-50%) translateY(-50%)`
         planetImage.style.top = `40%`
         planetImage.style.left = `63%`
       }
@@ -271,10 +266,10 @@ function MainPage() {
           
           <div className='parent left-corner'>
             
-                  <div className="parent" id="cmksalcnksd" style={{
+                  <div className="parent" id="text-overlay" style={{
                     marginBottom: '45px',
                   }} >
-                <div className="title parent dsnc observer pointless">
+                <div className="title parent cut-circle observer pointless">
                   <p>
                     Explore Your own planet
                   </p>
