@@ -204,13 +204,15 @@ header {
 .fifth-level {
   box-shadow: inset 0px 0px 23px #212124;
   padding: 23px;
-  
   top: 40%;
   left: 63%;
   transform: translateX(-50%) translateY(-50%);
   z-index: 10;
   cursor: pointer;
-  /* z-index: 1; */
+}
+
+.fifth-level.move-planet {
+  box-shadow: none;
 }
 
 

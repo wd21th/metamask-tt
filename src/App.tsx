@@ -130,21 +130,21 @@ function MainPage() {
     }
 
     const movePlanet = (e: any)=> {
-      const x = e.clientX;
-      const y = e.clientY;
+      e.target.classList.add('move-planet')
       const el = document.querySelector('.cut-circle') as HTMLElement;
       const planetImage = document.querySelector('#planet') as HTMLElement;
       var rect = (document.querySelector("#text-overlay")as HTMLElement).getBoundingClientRect();
-      var x_r = e.clientX - rect.left;
-      var y_r = e.clientY - rect.top;
+      var x_rel = e.clientX - rect.left;
+      var y_rel = e.clientY - rect.top;
       if(el){
-        el.style.clipPath = `circle(160px at ${x_r}px ${y_r}px)`
-        planetImage.style.top = `${y_r}px`
-        planetImage.style.left = `${x_r}px`
+        el.style.clipPath = `circle(160px at ${x_rel}px ${y_rel}px)`
+        planetImage.style.top = `${y_rel}px`
+        planetImage.style.left = `${x_rel}px`
       }
     }
 
     const returnToPlace = (e: any)=> {
+      e.target.classList.remove('move-planet')
       const el = document.querySelector('.cut-circle') as HTMLElement;
       const planetImage = document.querySelector('#planet') as HTMLElement;
       if(el){
@@ -227,14 +227,6 @@ function MainPage() {
     }
     <div className={"App" + (!hasExtension ? ' pointless' : '')}>
     
-   
-      <svg width="0" height="0" viewBox="0 0 320 322" fill="none" xmlns="http://www.w3.org/2000/svg" >
-          <clipPath id="mask" style={{position: 'absolute', right: 0}}>
-            <rect width="320" height="322" rx="160" fill="#E75626" style={{position: 'absolute', right: 0}}/>
-          </clipPath>
-      </svg>
-
-
       <div className="full-screen">
       <header className='in-row'>
         <div className="in-row half-width content-left">
@@ -285,7 +277,7 @@ function MainPage() {
                   </p>
                 </div>
               
-                <div className="fifth-level circle flow"
+                <div className="fifth-level circle flow observer"
                     onMouseMove={movePlanet}
                     onMouseLeave={returnToPlace}
                 >
