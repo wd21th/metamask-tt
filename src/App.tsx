@@ -22,16 +22,10 @@ interface User {
 
 function MainPage() {
   const [data, setData] = React.useState<null | Array<any>>(null);
-  const [listMe, setListMe] = React.useState(false);
+  const [listMe, setListMe] = React.useState<boolean>(false);
   const hasExtension = window.ethereum && window.ethereum.isMetaMask;
-  let contractAddress = '0xCF31E7c9E7854D7Ecd3F3151a9979BC2a82B4fe3';
 	const [address, setAddress] = React.useState<null | string>(null);
 	const [user, setUser] = React.useState<null | User>(null);
-
-
-	const [provider, setProvider] = React.useState<any>(null);
-	const [signer, setSigner] = React.useState<any>(null);
-	const [contract, setContract] = React.useState<any>(null);
   const accountChangedHandler = (newAccount: any) => {
     setAddress(newAccount);
   }
