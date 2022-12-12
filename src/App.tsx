@@ -27,6 +27,25 @@ function MainPage() {
   const accountChangedHandler = (newAccount: any) => {
     setAddress(newAccount);
   }
+
+  const getData = () => {
+  // In local developement, use this
+    // fetch("/data")
+    //   .then((res) => res.json())
+    //   .then((data) => setData(data));
+
+
+    // In production, use this
+    fetch('https://new-backend.unistory.app/api/data')
+    .then((res) => res.json())
+    .then((data) => {
+      if(localStorage.getItem('user')){
+        data.items.unshift(JSON.parse(localStorage.getItem('user') as string));
+      }
+      setData(data.items)
+    });
+    
+  }
   
   const chainChangedHandler = () => {
     // reload the page to avoid any errors with chain change mid use of application
@@ -68,6 +87,28 @@ function MainPage() {
       planetImage.style.left = `63%`
     }
   }
+
+  const submitForm = (e: FormEvent)=> {
+    e.preventDefault()
+    var formData = new FormData(e.target as HTMLFormElement);
+      if(address && !user){
+        if((formData.get('username') as string).trim() !== '' && (formData.get('email')  as string).trim() !== ''){
+          let user: User = {
+            id: null,
+            username: formData.get('username') as string,
+            email: formData.get('email') as string,
+            address: address
+          }
+          let arr = JSON.parse(JSON.stringify(data)) || []
+          arr.unshift(user)
+          setUser(user)
+          localStorage.setItem('user', JSON.stringify(user))
+          setData(arr)
+        }
+      }else {
+        connectWalletHandler()
+      }
+    }
   
 
   const removeMe = () => {
@@ -81,23 +122,7 @@ function MainPage() {
     
     
   React.useEffect(() => {
-    
-    // In local developement, use this
-    // fetch("/data")
-    //   .then((res) => res.json())
-    //   .then((data) => setData(data));
-
-
-    // In production, use this
-    fetch('https://new-backend.unistory.app/api/data')
-    .then((res) => res.json())
-    .then((data) => {
-      if(localStorage.getItem('user')){
-        data.items.unshift(JSON.parse(localStorage.getItem('user') as string));
-      }
-      setData(data.items)
-    });
-
+    getData();
     if(!hasExtension) {
       disableScroll()
     }else {
@@ -112,6 +137,7 @@ function MainPage() {
 
     if(localStorage.getItem('user')){
       setUser(JSON.parse(localStorage.getItem('user') as string));
+      
     }
 
     
@@ -249,28 +275,7 @@ function MainPage() {
                 <p className='user__subtitle subtitle'>
                     Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. 
                 </p>
-                <form className="user__form" onSubmit={(e: FormEvent)=> {
-                  e.preventDefault()
-                  var formData = new FormData(e.target as HTMLFormElement);
-                  console.log('formData :', formData.get('username'), formData.get('email'));
-                    if(address && !user){
-                      if((formData.get('username') as string).trim() !== '' && (formData.get('email')  as string).trim() !== ''){
-                        let user: User = {
-                          id: null,
-                          username: formData.get('username') as string,
-                          email: formData.get('email') as string,
-                          address: address
-                        }
-                        let arr = JSON.parse(JSON.stringify(data)) || []
-                        arr.unshift(user)
-                        setUser(user)
-                        localStorage.setItem('user', JSON.stringify(user))
-                        setData(arr)
-                      }
-                    }else {
-                      connectWalletHandler()
-                    }
-                  }}>
+                <form className="user__form" onSubmit={submitForm}>
                   <div className="user__field">
                     <p className='secondary-color user__label'>Name</p>
                     {
