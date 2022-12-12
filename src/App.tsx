@@ -28,30 +28,12 @@ function preventDefaultForScrollKeys(e: KeyboardEvent) {
 
 
 
-// call this to Disable
 function disableScroll() {
   // modern Chrome requires { passive: false } when adding event
-  var supportsPassive = true;
-  try {
-    // window.addEventListener("test", null, Object.defineProperty({}, 'passive', {
-    //   get: function () { supportsPassive = true; } 
-    // }));
-    // window.addEventListener("test", null, )
-  } catch(e) {}
-  var wheelOpt = supportsPassive ? { passive: false } : false;
   var wheelEvent = 'onwheel' in document.createElement('div') ? 'wheel' : 'mousewheel';
   window.addEventListener('DOMMouseScroll', preventDefault, false); // older FF
-  window.addEventListener(wheelEvent, preventDefault, wheelOpt); // modern desktop
-  // window.addEventListener('touchmove', preventDefault, wheelOpt); // mobile
+  window.addEventListener(wheelEvent, preventDefault, { passive: false }); // modern desktop
   window.addEventListener('keydown', preventDefaultForScrollKeys, false);
-}
-
-// call this to Enable
-function enableScroll() {
-  window.removeEventListener('DOMMouseScroll', preventDefault, false);
-  // window.removeEventListener(wheelEvent, preventDefault, wheelOpt); 
-  // window.removeEventListener('touchmove', preventDefault, wheelOpt);
-  window.removeEventListener('keydown', preventDefaultForScrollKeys, false);
 }
 
 interface User {
@@ -64,7 +46,6 @@ interface User {
 function MainPage() {
     const [data, setData] = React.useState<null | Array<any>>(null);
     const [listMe, setListMe] = React.useState(false);
-    // boolean hasExtension
     const hasExtension = window.ethereum && window.ethereum.isMetaMask;
 	  let contractAddress = '0xCF31E7c9E7854D7Ecd3F3151a9979BC2a82B4fe3';
 
@@ -92,16 +73,6 @@ function MainPage() {
 		setContract(tempContract );	
 	}
 
-	const setHandler = (event: { preventDefault: () => void; target: { setText: { value: string; }; }; }) => {
-		event.preventDefault();
-		console.log('sending ' + event.target.setText.value + ' to the contract');
-		contract.set(event.target.setText.value);
-	}
-
-	const getCurrentVal = async () => {
-		let val = await contract.get();
-		setCurrentContractVal(val);
-	}
 
     const accountChangedHandler = (newAccount: any) => {
     console.log('newAccount :', newAccount);
@@ -114,11 +85,7 @@ function MainPage() {
       window.location.reload();
     }
   
-
-
-    
     const connectWalletHandler = () => {
-      
         window.ethereum.request({ method: 'eth_requestAccounts'})
         .then((result: any[]) => {
           accountChangedHandler(result[0]);
@@ -191,7 +158,6 @@ function MainPage() {
           connectWalletHandler()
         }
         
-        // Прослушки нужно ставить в том случае если есть метамаск
         window.ethereum.on('accountsChanged', accountChangedHandler);
         window.ethereum.on('chainChanged', chainChangedHandler);
       }
@@ -226,7 +192,6 @@ function MainPage() {
         : <></>
       }
       <div className={"App" + (!hasExtension ? ' pointless' : '')}>
-        
         <div className="full-screen">
           <header className='in-row'>
             <div className="in-row half-width content-left">
@@ -331,8 +296,6 @@ function MainPage() {
             </div>
           </div>
         </div>
-
-
         <div className="full-screen">
           <div className="in-row info">
               <div className='press user'>
@@ -462,68 +425,69 @@ function UserPage(){
 
   return (
     <>
-    <div className="App">
-       <div className="full-screen">
-        <header className='in-row'>
-        <div className="in-row half-width content-left">
-          <Link to="/">
-            <div className="logo alignment-center">
-              <p className='secondary-color'>
-                  Logo
-              </p>
-            </div>
-          </Link>
+      <div className="App">
+        <div className="full-screen">
+          <header className='in-row'>
+          <div className="in-row half-width content-left">
+            <Link to="/">
+              <div className="logo alignment-center">
+                <p className='secondary-color'>
+                    Logo
+                </p>
+              </div>
+            </Link>
+          </div>
+        <div className="in-row half-width content-right">
+          <span className='primary-color'>{localUser?.address.slice(0, 15)}...</span>
         </div>
-      <div className="in-row half-width content-right">
-        <span className='primary-color'>{localUser?.address.slice(0, 15)}...</span>
-      </div>
-        </header>
-        <div className='parent v-center fill'>
-          <div className="in-row info">
-            <div className='press user'>
-              <h1 className="user__header secondary-color">
-                Personal data
-              </h1>
-              <div className="user__form">
-                <div className="user__field">
-                  <p className='secondary-color user__label'>Name</p>
-                  <p className='primary-color user__form-value'>
-                    {user?.username}
-                  </p>
-                </div>
-                <div className="user__field">
-                  <p className='secondary-color user__label'>Email</p>
-                  <p className='primary-color user__form-value'>
-                    {user?.email}
-                  </p>
-                </div>
-                <div className="user__field">
-                  <p className='secondary-color user__label'>Wallet</p>
-                  <p className='primary-color user__form-value'>
-                    {user?.address}
-                  </p>
+          </header>
+          <div className='parent v-center fill'>
+            <div className="in-row info">
+              <div className='press user'>
+                <h1 className="user__header secondary-color">
+                  Personal data
+                </h1>
+                <div className="user__form">
+                  <div className="user__field">
+                    <p className='secondary-color user__label'>Name</p>
+                    <p className='primary-color user__form-value'>
+                      {user?.username}
+                    </p>
+                  </div>
+                  <div className="user__field">
+                    <p className='secondary-color user__label'>Email</p>
+                    <p className='primary-color user__form-value'>
+                      {user?.email}
+                    </p>
+                  </div>
+                  <div className="user__field">
+                    <p className='secondary-color user__label'>Wallet</p>
+                    <p className='primary-color user__form-value'>
+                      {user?.address}
+                    </p>
+                  </div>
                 </div>
               </div>
-            </div>
-            <div className="fifth-level edge circle flow">
-              <div className="circle__" style={{pointerEvents: 'none'}}>
-                <div className="circle__item">
-                  <div className="circle__half circle__half--clipped"></div>
-                </div>
-                <div className="circle__half circle__half--fix"></div>
-                <div className="fourth-level circle slim-width">
-                  <div className="third-level circle slim-width">
-                    <div className="second-level circle slim-width">
-                      <div className="first-level circle slim-width">
-                        <div className='parent'>
-                            <img className='pointless' src={planet} alt=""/>
+              <div className="fifth-level edge circle flow">
+                <div className="circle__" style={{pointerEvents: 'none'}}>
+                  <div className="circle__item">
+                    <div className="circle__half circle__half--clipped"></div>
+                  </div>
+                  <div className="circle__half circle__half--fix"></div>
+                  <div className="fourth-level circle slim-width">
+                    <div className="third-level circle slim-width">
+                      <div className="second-level circle slim-width">
+                        <div className="first-level circle slim-width">
+                          <div className='parent'>
+                              <img className='pointless' src={planet} alt=""/>
+                          </div>
+                          <span className="point point-1 hide">
+                            <span className="sub-circle"></span>
+                          </span>
+                          <span className="point point-2"></span>
+                          <span className="point point-3"></span>
+                          <span className="point point-4"></span>
                         </div>
-                        <span className="point point-1 hide">
-                          <span className="sub-circle"></span>
-                        </span>
-                        <span className="point point-2"></span>
-                        <span className="point point-3"></span>
-                        <span className="point point-4"></span>
                       </div>
                     </div>
                   </div>
@@ -533,8 +497,7 @@ function UserPage(){
           </div>
         </div>
       </div>
-     </div>
-     </>
+    </>
   )
 }
 
