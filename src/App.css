@@ -8,6 +8,10 @@
   z-index: 10;
 }
 
+#text-overlay {
+  margin-bottom: 45px;
+}
+
 header {
   text-transform: uppercase;
 }

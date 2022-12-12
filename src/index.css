@@ -45,6 +45,10 @@ body {
   height: 100%;
 }
 
+.full-height {
+  height: 100%;
+}
+
 .in-row {
   display: flex;
   flex-direction: row;
@@ -120,7 +124,7 @@ span.slice{
 
 .info {
   text-align: left;
-  padding-bottom: 30px;
+  margin-bottom: 60px;
 }
 
 
