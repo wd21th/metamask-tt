@@ -1,11 +1,20 @@
 .App {
   text-align: center;
 }
+
 #planet {
   top: 40%;
   left: 63%;
   transform: translateX(-50%) translateY(-50%);
   z-index: 10;
+}
+
+.planet-place {
+  opacity: 0
+}
+
+#text-ahead {
+  z-index: 100;
 }
 
 #text-overlay {
@@ -16,7 +25,9 @@ header {
   text-transform: uppercase;
 }
 
-
+.main-content  {
+  margin-bottom: 60px;
+}
 
 .notify-modal{
   width: 422px;
@@ -25,10 +36,8 @@ header {
   background: #262628;
   padding: 60px 50px;
   border-radius: 20px;
-  /* box-shadow: inset 0px 0px 23px #212124; */
-  /* Задать внешний тень */
   box-shadow: 0px 0px 50px rgba(255, 255, 255, 0.5);
-    text-align: center;
+  text-align: center;
 }
 
 .notify-modal-content{
@@ -69,21 +78,10 @@ header {
   padding: 14px 5% 60px 5%;
 }
 
-header {
-  /* padding: 14px 5% 0px 5%; */
-}
-
 .title {
-  
   font-weight: 700;
   font-size: 120px;
-  line-height: 120%;
-  /* or 144px */
-
-
   color: #FFFFFF;
-
-  /* border: 1px solid #FFFFFF; */
   text-transform: uppercase;
   text-align: left;
 }
@@ -105,13 +103,9 @@ header {
   -webkit-text-stroke-color: #DBC2CF;
   letter-spacing: 3px;
   text-stroke: 1px #DBC2CF;
-  /* Future-proofing */
 }
 
 .stroke-text{
-  /* -webkit-text-stroke:1px #FFFFFF; */
-  /* -webkit-text-fill-color:transparent; */
-
   color: #171719;
   text-shadow: 
     1px 1px 0 #FFFFFF,
@@ -119,44 +113,14 @@ header {
     1px -1px 0 #FFFFFF,
     -1px -1px 0 #FFFFFF;
 }
-.ld {
+
+.outline-text {
   text-shadow: 
   1px 1px 0 #FFFFFF,
   -1px 1px 0 #FFFFFF,
   1px -1px 0 #FFFFFF,
   -1px -1px 0 #FFFFFF;
 }
-
-.jjj {
-  border-top-left-radius: 275px !important;
-  border-bottom-left-radius: 275px !important;
-  border-width: 1px !important;
-}
-
-.ndj {
-  border-top-right-radius: 275px !important;
-  border-bottom-right-radius: 275px !important;
-  border-width: 1px !important;
-}
-.nmcds {
-  /* width: 100%; */
-  /* width: fit-content !important; */
-  /* height: 100% !important; */
-  /* overflow: visible !important; */
-}
-
-.nmcds::after {
-  border: 1px solid transparent !important;
-}
-
-.nmcds * {
-  /* overflow: visible !important; */
-}
-.ncds{
-  position: relative !important;
-  border-width: 1px !important;
-}
-
 
 .logo {
   background: #5A5A5A;
@@ -192,17 +156,12 @@ header {
 
 .third-level {
   background: #1E1E20;
-  
   padding: 31px;
-  /* margin: 31px; */
-
 }
 
 .fourth-level {
   background: #171719;
-  /* border: 0.5px solid #E75626; */
   padding: 31px;
-
 }
 
 .fifth-level {
@@ -223,67 +182,8 @@ header {
 .fifth-level.edge {
   top: 50%; 
   left: 60%;
-  /* right: 0%; */
   transform: translateX(40%) translateY(-50%);
 }
-
-
-
-
-
-@keyframes loading-1{
-  0%{
-      -webkit-transform: rotate(0deg);
-      transform: rotate(0deg);
-  }
-  100%{
-      -webkit-transform: rotate(180deg);
-      transform: rotate(180deg);
-  }
-}
-@keyframes loading-2{
-  0%{
-      -webkit-transform: rotate(0deg);
-      transform: rotate(0deg);
-  }
-  100%{
-      /* -webkit-transform: rotate(144deg); */
-      /* transform: rotate(144deg); */
-      -webkit-transform: rotate(180deg);
-      transform: rotate(180deg);
-      
-  }
-}
-@keyframes loading-3{
-  0%{
-      -webkit-transform: rotate(0deg);
-      transform: rotate(0deg);
-  }
-  100%{
-      -webkit-transform: rotate(90deg);
-      transform: rotate(90deg);
-  }
-}
-@keyframes loading-4{
-  0%{
-      -webkit-transform: rotate(0deg);
-      transform: rotate(0deg);
-  }
-  100%{
-      -webkit-transform: rotate(36deg);
-      transform: rotate(36deg);
-  }
-}
-@keyframes loading-5{
-  0%{
-      -webkit-transform: rotate(0deg);
-      transform: rotate(0deg);
-  }
-  100%{
-      -webkit-transform: rotate(126deg);
-      transform: rotate(126deg);
-  }
-} 
 
 
 .point, .sub-circle {
@@ -321,7 +221,6 @@ header {
 
 .point.point-1  {
   background: white;
-  z-index: 11;
   left:50%;
   top: 0;
   transform: translateY(-50%);
@@ -362,16 +261,10 @@ header {
 
 .point.point-4 {
   animation-delay: 4.5s;
-
   left: 0;
   top: 50%;
   transform: translateX(-50%) translateY(-50%);
-
 }
-
-
-
-
 
 .quarter {
   width: 80px;
@@ -389,23 +282,18 @@ header {
   color: #171719;
 
   display: flex;
-  /* justify-content: center; */
   align-items: center;
 }
 
 .quarter p {
   display: flex;
-  /* justify-content: center; */
   align-items: center;
 }
 
 .cut-circle{
-  
   color: #E75626 !important;
-
   clip-path: circle(160px at 63% 40%);
   z-index: 110;
-  
 }
 
 .td3 a {
@@ -632,7 +520,6 @@ th {
   opacity: 0.5;
 }
 
-
 .roadmap{
   margin-bottom: 80px;
   margin-left: 27px;
@@ -641,8 +528,8 @@ th {
 .roadmap__caption{
   white-space: nowrap;
   font-weight: 700;
-font-size: 32px;
-margin-bottom: 42px;
+  font-size: 32px;
+  margin-bottom: 42px;
 }
 .roadmap .roadmap__point{
   border-bottom: 0.5px solid #D2C4C4;
@@ -658,6 +545,7 @@ margin-bottom: 42px;
   font-size: 18px;
   margin-bottom: 8px;
 }
+
 .roadmap__point-title{
   font-weight: 700;
   font-size: 28px;

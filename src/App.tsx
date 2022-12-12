@@ -162,13 +162,11 @@ function MainPage() {
             </div>
           </header>
           <div className='from-bottom full-height'>
-            <div className="in-row from-bottom" style={{
-                  marginBottom: '60px'
-            }}>
-              <div className="progress orange nmcds parent">
+            <div className="main-content in-row from-bottom">
+              <div className="orange parent">
                 
                 <div className="flow">
-                  <div className="title parent pointless" style={{zIndex: 102}}>
+                  <div id="text-ahead" className="title parent pointless">
                       <p>
                         Explore Your own planet
                       </p>
@@ -185,7 +183,7 @@ function MainPage() {
                         Explore Your own planet
                       </p>
                       <p>
-                        In <span className="ld">our New</span> metaverse
+                        In <span className="outline-text">our New</span> metaverse
                       </p>
                     </div>
                     <div className="fifth-level circle flow observer"
@@ -201,7 +199,7 @@ function MainPage() {
                           <div className="third-level circle slim-width">
                             <div className="second-level circle slim-width">
                               <div className="first-level circle slim-width">
-                                <div className='parent' style={{opacity: 0}} >
+                                <div className='parent planet-place' >
                                   <img className='pointless' src={planet} alt=""/>
                                 </div>
                                 <div className="quarter">
@@ -310,7 +308,7 @@ function MainPage() {
                     <tr>
                       <th>Name</th>
                       <th>Email</th>
-                      <th className='slice' style={{width: '200px'}}>Wallet</th>
+                      <th className='slice'>Wallet</th>
                     </tr>
                   </thead>
                   <tbody>
@@ -419,7 +417,7 @@ function UserPage(){
                 </div>
               </div>
               <div className="fifth-level edge circle flow">
-                <div className="circle__" style={{pointerEvents: 'none'}}>
+                <div className="circle__ pointless">
                   <div className="circle__item">
                     <div className="circle__half circle__half--clipped"></div>
                   </div>

@@ -18,8 +18,6 @@ body {
   margin: 0;
 }
 
-
-
 .primary-color {
   color: rgba(231, 86, 38, 1);
 }
@@ -126,7 +124,6 @@ span.slice{
   text-align: left;
   margin-bottom: 60px;
 }
-
 
 .from-bottom {
   display: flex;
