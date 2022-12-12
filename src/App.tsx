@@ -19,12 +19,12 @@ interface User {
 }
 
 function MainPage() {
-  const [data, setData] = React.useState<null | Array<any>>(null);
+  const [data, setData] = React.useState<null | Array<User>>(null);
   const [listMe, setListMe] = React.useState<boolean>(false);
   const hasExtension = window.ethereum && window.ethereum.isMetaMask;
 	const [address, setAddress] = React.useState<null | string>(null);
 	const [user, setUser] = React.useState<null | User>(null);
-  const accountChangedHandler = (newAccount: any) => {
+  const accountChangedHandler = (newAccount: string) => {
     setAddress(newAccount);
   }
 
@@ -371,7 +371,6 @@ function UserPage(){
     getUser();
     setLocalUser(JSON.parse(localStorage.getItem('user') || '{}'))
   }, [id]);
-
 
   return (
     <>
