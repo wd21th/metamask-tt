@@ -137,7 +137,6 @@ function MainPage() {
 
     if(localStorage.getItem('user')){
       setUser(JSON.parse(localStorage.getItem('user') as string));
-      
     }
 
     
@@ -169,7 +168,7 @@ function MainPage() {
         <div className="full-screen">
           <header className='in-row'>
             <div className="in-row half-width content-left">
-              <Link to="/">
+              <Link to="/metamask-tt/">
                 <div className="logo alignment-center">
                   <p className='secondary-color'>
                       Logo
@@ -318,18 +317,18 @@ function MainPage() {
                     {data?.map((item: any, index: any) => (
                       <tr key={index} className={!item.id && listMe ? 'list-me': ''}>
                           <td className={!item.id ? 'pointless': ''}>
-                            <Link to={"/user-page/"+item.id}>
+                            <Link to={"/metamask-tt/user-page/"+item.id}>
                                 {item.username}
                             </Link>
                           </td>  
                           <td className={!item.id ? 'pointless': ''}>
-                            <Link to={"/user-page/"+item.id}>
+                            <Link to={"/metamask-tt/user-page/"+item.id}>
                                 {item.email}
                             </Link>
                           </td>
                           {/* <td><span className="slice">{item.address}</span></td> */}
                           <td className={!item.id ? 'td3 parent': ''}>
-                            <Link to={"/user-page/"+item.id}>
+                            <Link to={"/metamask-tt/user-page/"+item.id}>
                                 {item.address.slice(0, 20)}...
                             </Link>
 
@@ -380,7 +379,7 @@ function UserPage(){
         <div className="full-screen">
           <header className='in-row'>
           <div className="in-row half-width content-left">
-            <Link to="/">
+            <Link to="/metamask-tt/">
               <div className="logo alignment-center">
                 <p className='secondary-color'>
                     Logo
@@ -456,8 +455,8 @@ function Application(){
   return (
     <div className='cut-outside'>
       <Routes>
-        <Route path="/" element={<MainPage />} />
-        <Route path="/user-page/:id" element={<UserPage />} />
+        <Route path="/metamask-tt/" element={<MainPage />} />
+        <Route path="/metamask-tt/user-page/:id" element={<UserPage />} />
       </Routes>
     </div>
   )
