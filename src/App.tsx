@@ -3,7 +3,7 @@ import './App.css';
 import planet from './planet.png';
 import { ethers } from 'ethers';
 import SimpleStorage_abi from './SimpleStorage_abi.json'
-
+import {disableScroll} from './helper-functions'
 
 import {
   Routes,
@@ -12,28 +12,6 @@ import {
 } from 'react-router-dom';
 import { Link } from 'react-router-dom';
 
-var keys: any = {37: 1, 38: 1, 39: 1, 40: 1};
-
-function preventDefault(e: Event) {
-  e.preventDefault();
-}
-
-function preventDefaultForScrollKeys(e: KeyboardEvent) {
-  if (keys[e.keyCode]) { // new way: keys[e.key]
-    preventDefault(e);
-    return false;
-  }
-}
-
-
-
-function disableScroll() {
-  // modern Chrome requires { passive: false } when adding event
-  var wheelEvent = 'onwheel' in document.createElement('div') ? 'wheel' : 'mousewheel';
-  window.addEventListener('DOMMouseScroll', preventDefault, false); // older FF
-  window.addEventListener(wheelEvent, preventDefault, { passive: false }); // modern desktop
-  window.addEventListener('keydown', preventDefaultForScrollKeys, false);
-}
 
 interface User {
   id: number | null;
@@ -47,121 +25,105 @@ function MainPage() {
   const [listMe, setListMe] = React.useState(false);
   const hasExtension = window.ethereum && window.ethereum.isMetaMask;
   let contractAddress = '0xCF31E7c9E7854D7Ecd3F3151a9979BC2a82B4fe3';
-	const [address, setDefaultAccount] = React.useState<null | string>(null);
+	const [address, setAddress] = React.useState<null | string>(null);
 	const [user, setUser] = React.useState<null | User>(null);
 
-	const [currentContractVal, setCurrentContractVal] = React.useState(null);
 
 	const [provider, setProvider] = React.useState<any>(null);
 	const [signer, setSigner] = React.useState<any>(null);
 	const [contract, setContract] = React.useState<any>(null);
-	// update account, will cause component re-render
-	const updateEthers = () => {
-		let tempProvider = new ethers.providers.Web3Provider(window.ethereum);
-		setProvider(tempProvider);
-
-		let tempSigner = tempProvider.getSigner();
-		setSigner(tempSigner);
-
-		let tempContract = new ethers.Contract(contractAddress, SimpleStorage_abi, tempSigner);
-		setContract(tempContract );	
-	}
-
-
-    const accountChangedHandler = (newAccount: any) => {
-    console.log('newAccount :', newAccount);
-      setDefaultAccount(newAccount);
-      updateEthers();
-    }
+  const accountChangedHandler = (newAccount: any) => {
+    setAddress(newAccount);
+  }
   
-    const chainChangedHandler = () => {
-      // reload the page to avoid any errors with chain change mid use of application
-      window.location.reload();
-    }
+  const chainChangedHandler = () => {
+    // reload the page to avoid any errors with chain change mid use of application
+    window.location.reload();
+  }
   
-    const connectWalletHandler = () => {
-        window.ethereum.request({ method: 'eth_requestAccounts'})
-        .then((result: any[]) => {
-          accountChangedHandler(result[0]);
-          localStorage.setItem('visited', '1');
-        })
-        .catch((error: { message: React.SetStateAction<null>; }) => {
-          alert(error.message);
-        });
-    }
-
-    const movePlanet = (e: any)=> {
-      e.target.classList.add('move-planet')
-      const el = document.querySelector('.cut-circle') as HTMLElement;
-      const planetImage = document.querySelector('#planet') as HTMLElement;
-      var rect = (document.querySelector("#text-overlay")as HTMLElement).getBoundingClientRect();
-      var x_rel = e.clientX - rect.left;
-      var y_rel = e.clientY - rect.top;
-      if(el){
-        el.style.clipPath = `circle(160px at ${x_rel}px ${y_rel}px)`
-        planetImage.style.top = `${y_rel}px`
-        planetImage.style.left = `${x_rel}px`
-      }
-    }
-
-    const returnToPlace = (e: any)=> {
-      e.target.classList.remove('move-planet')
-      const el = document.querySelector('.cut-circle') as HTMLElement;
-      const planetImage = document.querySelector('#planet') as HTMLElement;
-      if(el){
-        el.style.clipPath = `circle(160px at 63% 40%)`
-        planetImage.style.top = `40%`
-        planetImage.style.left = `63%`
-      }
-    }
-    
-
-    const removeMe = () => {
-      let arr = data || [];
-      arr.shift();
-      setData(JSON.parse(JSON.stringify(arr)));
-      localStorage.removeItem('user');
-      setUser(null);
-      window.location.reload();
-    }
-    
-    
-    React.useEffect(() => {
-      
-      // In local developement, use this
-      // fetch("/data")
-      //   .then((res) => res.json())
-      //   .then((data) => setData(data));
-
-
-      // In production, use this
-      fetch('https://new-backend.unistory.app/api/data')
-      .then((res) => res.json())
-      .then((data) => {
-        if(localStorage.getItem('user')){
-          data.items.unshift(JSON.parse(localStorage.getItem('user') as string));
-        }
-        setData(data.items)
+  const connectWalletHandler = () => {
+      window.ethereum.request({ method: 'eth_requestAccounts'})
+      .then((result: any[]) => {
+        accountChangedHandler(result[0]);
+        localStorage.setItem('visited', '1');
+      })
+      .catch((error: { message: React.SetStateAction<null>; }) => {
+        alert(error.message);
       });
+  }
 
-      if(!hasExtension) {
-        disableScroll()
-      }else {
+  const movePlanet = (e: any)=> {
+    e.target.classList.add('move-planet')
+    const el = document.querySelector('.cut-circle') as HTMLElement;
+    const planetImage = document.querySelector('#planet') as HTMLElement;
+    var rect = (document.querySelector("#text-overlay") as HTMLElement).getBoundingClientRect();
+    var x_rel = e.clientX - rect.left;
+    var y_rel = e.clientY - rect.top;
+    if(el){
+      el.style.clipPath = `circle(160px at ${x_rel}px ${y_rel}px)`
+      planetImage.style.top = `${y_rel}px`
+      planetImage.style.left = `${x_rel}px`
+    }
+  }
 
-        if(+(localStorage.getItem('visited') || 0)){
-          connectWalletHandler()
-        }
-        
-        window.ethereum.on('accountsChanged', accountChangedHandler);
-        window.ethereum.on('chainChanged', chainChangedHandler);
-      }
+  const returnToPlace = (e: any)=> {
+    e.target.classList.remove('move-planet')
+    const el = document.querySelector('.cut-circle') as HTMLElement;
+    const planetImage = document.querySelector('#planet') as HTMLElement;
+    if(el){
+      el.style.clipPath = `circle(160px at 63% 40%)`
+      planetImage.style.top = `40%`
+      planetImage.style.left = `63%`
+    }
+  }
+  
 
+  const removeMe = () => {
+    let arr = data || [];
+    arr.shift();
+    setData(JSON.parse(JSON.stringify(arr)));
+    localStorage.removeItem('user');
+    setUser(null);
+    window.location.reload();
+  }
+    
+    
+  React.useEffect(() => {
+    
+    // In local developement, use this
+    // fetch("/data")
+    //   .then((res) => res.json())
+    //   .then((data) => setData(data));
+
+
+    // In production, use this
+    fetch('https://new-backend.unistory.app/api/data')
+    .then((res) => res.json())
+    .then((data) => {
       if(localStorage.getItem('user')){
-        setUser(JSON.parse(localStorage.getItem('user') as string));
+        data.items.unshift(JSON.parse(localStorage.getItem('user') as string));
       }
+      setData(data.items)
+    });
 
+    if(!hasExtension) {
+      disableScroll()
+    }else {
+
+      if(+(localStorage.getItem('visited') || 0)){
+        connectWalletHandler()
+      }
       
-    }, []);
+      window.ethereum.on('accountsChanged', accountChangedHandler);
+      window.ethereum.on('chainChanged', chainChangedHandler);
+    }
+
+    if(localStorage.getItem('user')){
+      setUser(JSON.parse(localStorage.getItem('user') as string));
+    }
+
+    
+  }, []);
 
   return (
     <>
