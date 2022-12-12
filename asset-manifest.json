@@ -1,7 +1,7 @@
 {
   "files": {
-    "main.css": "/static/css/main.11c10c15.css",
-    "main.js": "/static/js/main.dd67d78d.js",
+    "main.css": "/static/css/main.34b6e696.css",
+    "main.js": "/static/js/main.0b27abfc.js",
     "static/js/787.28cb0dcd.chunk.js": "/static/js/787.28cb0dcd.chunk.js",
     "static/media/planet.png": "/static/media/planet.0c6035829e6d304635ef.png",
     "static/media/AvenirNextCyr-ThinItalic.eot": "/static/media/AvenirNextCyr-ThinItalic.abcd9d8551aca503cabd.eot",
@@ -68,12 +68,12 @@
     "static/media/bebasneueregular.woff2": "/static/media/bebasneueregular.0aaf8f475e9ff51c29bf.woff2",
     "static/media/bebasneuebold.woff2": "/static/media/bebasneuebold.beb6b9047e5df8aa73cc.woff2",
     "index.html": "/index.html",
-    "main.11c10c15.css.map": "/static/css/main.11c10c15.css.map",
-    "main.dd67d78d.js.map": "/static/js/main.dd67d78d.js.map",
+    "main.34b6e696.css.map": "/static/css/main.34b6e696.css.map",
+    "main.0b27abfc.js.map": "/static/js/main.0b27abfc.js.map",
     "787.28cb0dcd.chunk.js.map": "/static/js/787.28cb0dcd.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.11c10c15.css",
-    "static/js/main.dd67d78d.js"
+    "static/css/main.34b6e696.css",
+    "static/js/main.0b27abfc.js"
   ]
 }
