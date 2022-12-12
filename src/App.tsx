@@ -1,8 +1,6 @@
 import React, { FormEvent } from 'react';
 import './App.css';
 import planet from './planet.png';
-import { ethers } from 'ethers';
-import SimpleStorage_abi from './SimpleStorage_abi.json'
 import {disableScroll} from './helper-functions'
 
 import {
