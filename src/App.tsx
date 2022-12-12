@@ -19,8 +19,7 @@ function preventDefault(e: Event) {
 }
 
 function preventDefaultForScrollKeys(e: KeyboardEvent) {
-  if (keys[e.keyCode]) {
-  // if (keys[e.key]) {
+  if (keys[e.keyCode]) { // new way: keys[e.key]
     preventDefault(e);
     return false;
   }
@@ -44,12 +43,10 @@ interface User {
 }
 
 function MainPage() {
-    const [data, setData] = React.useState<null | Array<any>>(null);
-    const [listMe, setListMe] = React.useState(false);
-    const hasExtension = window.ethereum && window.ethereum.isMetaMask;
-	  let contractAddress = '0xCF31E7c9E7854D7Ecd3F3151a9979BC2a82B4fe3';
-
-	
+  const [data, setData] = React.useState<null | Array<any>>(null);
+  const [listMe, setListMe] = React.useState(false);
+  const hasExtension = window.ethereum && window.ethereum.isMetaMask;
+  let contractAddress = '0xCF31E7c9E7854D7Ecd3F3151a9979BC2a82B4fe3';
 	const [address, setDefaultAccount] = React.useState<null | string>(null);
 	const [user, setUser] = React.useState<null | User>(null);
 
@@ -58,9 +55,6 @@ function MainPage() {
 	const [provider, setProvider] = React.useState<any>(null);
 	const [signer, setSigner] = React.useState<any>(null);
 	const [contract, setContract] = React.useState<any>(null);
-
-
-
 	// update account, will cause component re-render
 	const updateEthers = () => {
 		let tempProvider = new ethers.providers.Web3Provider(window.ethereum);
@@ -409,8 +403,8 @@ function MainPage() {
 
 function UserPage(){
   const { id } = useParams();
-  const [user, setUser] = React.useState<any>(null);
-  const [localUser, setLocalUser] = React.useState<any>(null);
+  const [user, setUser] = React.useState<User | null>(null);
+  const [localUser, setLocalUser] = React.useState<User | null>(null);
   React.useEffect(() => {
     const getUser = async () => {
       // locally: /data/id/${id}
